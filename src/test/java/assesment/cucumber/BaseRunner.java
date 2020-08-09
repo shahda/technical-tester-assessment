@@ -13,11 +13,7 @@ import org.junit.runner.RunWith;
                         "assesment.cucumber"
                 },
                 plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
-
-
                 snippets = SnippetType.CAMELCASE, // Specify camelCase for generated method names.
-
-
                 monochrome = true // Simpler display output (no control codes to confuse windows).
                 //tags = {"~@ignore"}) // Which tags to run
         )

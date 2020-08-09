@@ -9,7 +9,7 @@ pipeline {
     parameters {
         choice(
                 name: 'TAGS',
-                choices: ['All','@RunAllScenarios'],
+                choices: ['All','@RunAllGetScenarios','@RunAllPostScenarios'],
                 description: 'Choose a tag to run the corresponding tests'
         )
 
@@ -17,12 +17,7 @@ pipeline {
                 name: 'environment',
                 choices: [ 'local','SIT','UAT'],
                 description: 'Choose the target environment'
-        )
-        choice(
-                name: 'browser',
-                choices: [ 'htmlunit'],
-                description: 'Choose the browser'
-        )
+        ))
     }
     stages {
         stage('Prepare Workspace and checkout') {
@@ -43,9 +38,9 @@ pipeline {
 
                 script {
                     if ("${params.TAGS}" == 'All') {
-                        sh "'${mvnHome}/bin/mvn' verify -P ${params.environment}"
+                        sh "'${mvnHome}/bin/mvn' verify -DtargetEnv=${params.environment}"
                     } else {
-                        sh "'${mvnHome}/bin/mvn' verify -P ${params.environment} -Dcucumber.options='--tags ${params.TAGS}'"
+                        sh "'${mvnHome}/bin/mvn' verify -DtargetEnv=${params.environment} -Dcucumber.options='--tags ${params.TAGS}'"
                     }
                 }
             }

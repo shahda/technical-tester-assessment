@@ -12,7 +12,7 @@ import java.io.File;
 @CucumberOptions
 
         (
-                tags = {"@RunAllScenarios"}) // Specify which feature files or scenarios to run or ignore
+                tags = {"@RunAllGetScenarios,@RunAllPostScenarios"}) // Specify which feature files or scenarios to run or ignore
 
 public class TestRunner extends BaseRunner {
     @AfterClass

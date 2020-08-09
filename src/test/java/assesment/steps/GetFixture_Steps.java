@@ -1,25 +1,20 @@
 package assesment.steps;
 
-import assesment.responses.GetFixtureId;
+import assesment.responses.FixtureResponse;
 import assesment.utils.ReadData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import assesment.base.BaseAPI;
-import org.apache.commons.io.filefilter.FalseFileFilter;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
+public class GetFixture_Steps {
 
-public class TechnicalTestSteps {
-
-    private static Logger logger = LoggerFactory.getLogger(TechnicalTestSteps.class);
+    private static Logger logger = LoggerFactory.getLogger(GetFixture_Steps.class);
 
     @Given("^the app is up and running$")
     public void the_app_is_up_and_running() throws Throwable {
@@ -33,9 +28,8 @@ public class TechnicalTestSteps {
     }
 
     @And ("the response includes the correct response \"([^\"]*)\" and status code$")
-    public void responseByFixtureId(String id) throws IOException
-    {
-            GetFixtureId.assertFixtureIdResponse(id);
+    public void responseByFixtureId(String id) throws IOException {
+            FixtureResponse.assertFixtureIdResponse(id);
     }
 
     @When("the request is performed to get all fixtures$")
@@ -51,13 +45,13 @@ public class TechnicalTestSteps {
     @And("the response includes the correct fixture size (\\d+)$")
     public void responseAllFixtures(int fixtureArraySize) throws IOException
     {
-        GetFixtureId.assertAllFixtures(fixtureArraySize);
+        FixtureResponse.assertAllFixtures(fixtureArraySize);
     }
 
     @And("each fixture has fixtureid value$")
     public void responseFixturesById() throws IOException
     {
-        GetFixtureId.assertFixturesById();
+        FixtureResponse.assertFixturesById();
     }
 
 }

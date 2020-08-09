@@ -40,7 +40,7 @@ logback is used for logging/debugging
 TEST DATA
 ---------
 config.properties is used to specify the URL and Browser
-Dynamic data is held in Example tables.
+Dynamic testDataResources is held in Example tables.
 
 COMMAND LINE EXECUTION
 ----------------------
