@@ -21,7 +21,7 @@ Maven Project.
 
 TOOLS USED
 ----------
-Apache Maven 3.6.1
+Apache Maven 3.5.3
 Java 1.8
 Cucumber-JVM 1.2.5
 JUnit 4.12
@@ -41,6 +41,7 @@ TEST DATA
 ---------
 config.properties is used to specify the URL and Browser
 Dynamic testDataResources is held in Example tables.
+JSON file is used
 
 COMMAND LINE EXECUTION
 ----------------------

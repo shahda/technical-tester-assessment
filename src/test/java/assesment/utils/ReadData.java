@@ -19,11 +19,12 @@ public class ReadData {
             prop = new Properties();
             fileInput = new FileInputStream(file);
             prop.load(fileInput);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
         return prop.getProperty(key);
     }
