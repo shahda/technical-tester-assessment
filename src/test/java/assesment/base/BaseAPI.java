@@ -18,13 +18,14 @@ public class BaseAPI {
     private static Logger logger = LoggerFactory.getLogger(BaseAPI.class);
     private static Integer statusCode = 0;
     private static String endpoint = null;
-    private static String statusLine = null;
+
     public static Response postResponse;
     public static Response responseGet;
     public static Response deleteResponse;
-    public static JSONObject request;
 
+    //Get Method
     public static void getRequest(String resource) {
+        statusCode =0;
         responseGet = null;
         endpoint = resource;
         logger.info("\n URL: " + cucumberHooks.baseURL + endpoint + "\n");
@@ -45,27 +46,29 @@ public class BaseAPI {
         }
     }
 
+    //Post Method
     public static void postRequest(JSONObject requestBody, String endpoint) throws IOException {
+        statusCode =0;
         postResponse = null;
-        request = requestBody;
         HashMap<String, String> headerMap = new HashMap<>();
         headerMap.put( "Content-Type", "application/json" );
         try {
             postResponse = RestAssured.given()
                     .headers( headerMap )
-                    .body( request.toString())
+                    .body( requestBody.toString())
                     .post( cucumberHooks.baseURL + endpoint )
                     .then()
                     .extract()
                     .response();
             statusCode = postResponse.getStatusCode();
-            statusLine = postResponse.getStatusLine();
         } catch (Exception e) {
             logger.error( "Error: " + e.getMessage() );
         }
     }
 
+    //Delete Method
     public static void deleteRequest(String endpoint) throws IOException {
+        statusCode =0;
         deleteResponse = null;
         HashMap<String, String> headerMap = new HashMap<>();
         headerMap.put( "Content-Type", "application/json" );
@@ -77,12 +80,13 @@ public class BaseAPI {
                     .extract()
                     .response();
             statusCode = deleteResponse.getStatusCode();
-            statusLine = deleteResponse.getStatusLine();
         } catch (Exception e) {
             logger.error( "Error: " + e.getMessage() );
         }
     }
 
+
+    //Common Assert methods
     public static void assertResponseStatus(Integer statusCode) {
         logger.info("\n Api resource path " + endpoint + " status: " + BaseAPI.statusCode + "\n");
         Assert.assertEquals(endpoint + " has failed, expected: ", statusCode, BaseAPI.statusCode);
